@@ -28,10 +28,8 @@ total_daily_cases <- sum(states_daily_cases_modified$Counts)
 cases_str = paste("Total Cases by", max(states_daily_cases$Date),sep = " ")    
 
 states_daily_death_modified <- states_daily_death %>% 
-    pivot_longer(cols = -Date, names_to = "States", values_to = "Counts") %>% 
-    mutate(Date = lubridate::parse_date_time(Date,
-                                             orders = c("d m y", "d B Y", "m/d/y"),
-                                             locale = "eng"))
+    pivot_longer(cols = -Date, names_to = "States", values_to = "Counts") %>%  
+    mutate(Date = lubridate::parse_date_time(Date, "mdy"))
 
 
 total_daily_death <- sum(states_daily_death_modified$Counts)
@@ -41,9 +39,8 @@ death_str = paste("Total Death by", max(states_daily_death_modified$Date),sep = 
 
 states_daily_recovered_modified <- states_daily_recovered %>% 
     pivot_longer(cols = -Date, names_to = "States", values_to = "Counts") %>% 
-    mutate(Date = lubridate::parse_date_time(Date,
-                                             orders = c("d m y", "d B Y", "m/d/y"),
-                                             locale = "eng"))
+     
+    mutate(Date = lubridate::parse_date_time(Date, "mdy"))
 
 
 total_daily_recovered <- sum(states_daily_recovered_modified$Counts)
